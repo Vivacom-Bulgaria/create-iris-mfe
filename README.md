@@ -105,7 +105,7 @@ Components are placed in `src/components/ui/`.
 
 `cli/` is a separate npm package, `create-iris-mfe`, that scaffolds new remotes from this repo. It ships a verbatim snapshot of this app in `cli/template/`; the `template` identity is copied as-is, and renaming it is the scaffolded project's business.
 
-That snapshot is **generated, not maintained**: [scripts/copy-template.mjs](scripts/copy-template.mjs) produces it and `cli/template/` is gitignored, so this app stays the single source of truth. The script runs from `prepack`, so both `npm pack` and `npm publish` refresh it automatically.
+That snapshot is **generated, not maintained**: [cli/index.js](cli/index.js) produces it in its maintainer-only `--pack` mode and `cli/template/` is gitignored, so this app stays the single source of truth. `--pack` runs from `prepack`, so both `npm pack` and `npm publish` refresh it automatically.
 
 ```bash
 cd cli

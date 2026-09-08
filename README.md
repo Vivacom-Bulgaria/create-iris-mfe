@@ -1,119 +1,54 @@
-# Vite React MFE Template
+# create-iris-mfe
 
-A modern React micro-frontend template built with Vite, TypeScript, Tailwind CSS v4, and Module Federation.
-
-## Tech Stack
-
-- **React 19** + **TypeScript 5.9** + **Vite**
-- **Tailwind CSS v4** with CSS custom properties theming
-- **Module Federation** (`@originjs/vite-plugin-federation`)
-- **React Router v7** (import from `react-router`, NOT `react-router-dom`)
-- **TanStack Query** for data fetching
-- **React Hook Form** + **Zod** for forms and validation
-- **TanStack Table** for table sorting, filtering and pagination
-- **shadcn/ui** (New York style) for UI components
-- **Base UI toast** for toast notifications
-- **Lucide React** for icons
-- **Orval** for API client generation
-
-## Getting Started
+Scaffold a React micro-frontend remote — Vite, TypeScript, Tailwind CSS v4 and Module Federation, wired up and ready to run.
 
 ```bash
-npx create-iris-mfe my-app
-cd my-app
+npx create-iris-mfe billing
+cd billing
 npm install
 npm run dev
 ```
 
-This copies the template into `./my-app`. The project keeps the `template` identity - federation name, `/v2/remote/template/` base path, i18n namespace and `template-ws` backend service - so follow **Renaming the remote** in the new project's `AGENTS.md` to give it its own.
+## What you get
 
-Already scaffolded? Just `npm install` and `npm run dev`.
+- **React 19** + **TypeScript 5.9** + **Vite 7**
+- **Module Federation** (`@module-federation/vite`) — `src/App.tsx` is exposed as `./App`; `src/main.tsx` runs only standalone
+- **Tailwind CSS v4** with CSS custom properties theming, plus **shadcn/ui** components
+- **React Router v7**, **TanStack Query**, **TanStack Table**
+- **React Hook Form** + **Zod**
+- **i18next** with `en` / `bg` bundles
+- **orval** for generating typed API clients from an OpenAPI spec
+- ESLint, Prettier, Husky and lint-staged already configured
 
-## Scripts
+## The name is the folder
 
-| Script             | Description                           |
-| ------------------ | ------------------------------------- |
-| `npm run dev`      | Start development server              |
-| `npm run build`    | TypeScript compilation + Vite build   |
-| `npm run lint`     | ESLint                                |
-| `npm run format`   | Prettier format                       |
-| `npm run preview`  | Preview production build              |
-| `npm run generate` | Generate API client from OpenAPI spec |
+The name you pass is the directory the project lands in. Lowercase letters, digits and dashes;
+must start with a letter.
 
-## Project Structure
+The project itself is copied verbatim, so it keeps the `template` identity:
 
-```
-src/
-├── data/            # Generated API client (via npm run generate)
-├── assets/          # Static assets
-├── components/
-│   ├── ui/          # shadcn/ui components (button, card, field, input...)
-│   └── theme-provider.tsx
-├── hooks/           # Shared custom hooks
-├── layouts/         # Layout components (root-layout.tsx)
-├── lib/             # Utilities (cn, etc.)
-├── pages/           # Page components (home.tsx, etc.)
-├── providers/       # Context providers (query-provider.tsx)
-├── main.tsx         # App entry point
-└── index.css        # Tailwind CSS v4 + theme variables
-```
+|                 |                        |
+| --------------- | ---------------------- |
+| Federation name | `template`             |
+| Base path       | `/v2/remote/template/` |
+| i18n namespace  | `template`             |
+| Backend service | `/template-ws`         |
+| Package name    | `iris_v2_template`     |
 
-## Module Federation
+Two remotes cannot be mounted in the same shell while they share that identity. **Renaming the
+remote** in the new project's `AGENTS.md` is the checklist for giving it its own.
 
-Configure remotes and exposes in `vite.config.ts`:
+## Options
 
-```typescript
-federation({
-  name: "app",
-  remotes: {
-    // "remoteApp": "http://localhost:5001/assets/remoteEntry.js",
-  },
-  exposes: {
-    // "./Button": "./src/components/ui/button.tsx",
-  },
-  shared: ["react", "react-dom", "react-router"],
-})
-```
+| Flag           | Effect                             |
+| -------------- | ---------------------------------- |
+| `--no-git`     | skip `git init` in the new project |
+| `-h`, `--help` | usage                              |
 
-## Adding shadcn/ui Components
+Run it with no name and it will prompt for one.
 
-```bash
-npx shadcn@latest add <component-name>
-```
+## After scaffolding
 
-Components are placed in `src/components/ui/`.
+Rename the remote (see **Renaming the remote** in `AGENTS.md`), then point `orval.config.ts` at your service's swagger URL and run `npm run generate` to produce typed hooks under `src/data/<name>-ws/`.
 
-## API Client Generation
-
-1. Start your backend API server
-2. Run `npm run generate` to generate the TypeScript API client from the OpenAPI spec (configured in `orval.config.ts`)
-3. Generated files go to `src/data/template-ws/` - hooks in `endpoints/`, types in `model/`
-4. Use the generated TanStack Query hooks directly
-
-## Key Conventions
-
-- **Use `react-router`** not `react-router-dom`
-- **Use TanStack Query** for ALL API calls — no direct fetch/axios
-- **Use React Hook Form + Zod** for all forms
-- **Use TanStack Table** for table sorting, filtering and pagination
-- **Use Base Ui Toast** for toast notifications
-- **Use shadcn/ui ONLY** — no other UI libraries
-- **Use `cn()`** for className merging
-- **Use `@/` aliases** for imports
-
-## Releasing the scaffolder
-
-`cli/` is a separate npm package, `create-iris-mfe`, that scaffolds new remotes from this repo. It ships a verbatim snapshot of this app in `cli/template/`; the `template` identity is copied as-is, and renaming it is the scaffolded project's business.
-
-That snapshot is **generated, not maintained**: [cli/index.js](cli/index.js) produces it in its maintainer-only `--pack` mode and `cli/template/` is gitignored, so this app stays the single source of truth. `--pack` runs from `prepack`, so both `npm pack` and `npm publish` refresh it automatically.
-
-```bash
-cd cli
-npm version patch                          # or minor / major
-npm pack                                   # regenerates template/
-tar -tf create-iris-mfe-1.0.0.tgz          # confirm template/ is inside
-npx ./create-iris-mfe-1.0.0.tgz test-app   # smoke test the real npx path
-npm publish --access public
-```
-
-Publishing is permanent: `npm unpublish` is only allowed within 72 hours, and a version number can never be reused. Fix a bad release by publishing the next patch version.
+Requires Node 20 or newer.

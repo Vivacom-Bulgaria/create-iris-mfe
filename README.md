@@ -20,33 +20,6 @@ npm run dev
 - **orval** for generating typed API clients from an OpenAPI spec
 - ESLint, Prettier, Husky and lint-staged already configured
 
-## The name is the folder
-
-The name you pass is the directory the project lands in. Lowercase letters, digits and dashes;
-must start with a letter.
-
-The project itself is copied verbatim, so it keeps the `template` identity:
-
-|                 |                        |
-| --------------- | ---------------------- |
-| Federation name | `template`             |
-| Base path       | `/v2/remote/template/` |
-| i18n namespace  | `template`             |
-| Backend service | `/template-ws`         |
-| Package name    | `iris_v2_template`     |
-
-Two remotes cannot be mounted in the same shell while they share that identity. **Renaming the
-remote** in the new project's `AGENTS.md` is the checklist for giving it its own.
-
-## Options
-
-| Flag           | Effect                             |
-| -------------- | ---------------------------------- |
-| `--no-git`     | skip `git init` in the new project |
-| `-h`, `--help` | usage                              |
-
-Run it with no name and it will prompt for one.
-
 ## After scaffolding
 
 Rename the remote (see **Renaming the remote** in `AGENTS.md`), then point `orval.config.ts` at your service's swagger URL and run `npm run generate` to produce typed hooks under `src/data/<name>-ws/`.

@@ -33,8 +33,12 @@ jobs:
             exit 1
           fi
 
+      - name: Verify template installs and builds
+        run: npm ci && npm run build
+        working-directory: template
+
       - name: Check package contents
         run: npm pack --dry-run
 
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm stage publish

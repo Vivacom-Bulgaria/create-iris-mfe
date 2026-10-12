@@ -1,0 +1,147 @@
+/*
+ * IRIS design tokens for the shared components (tables, status badges, page
+ * header). Imported from index.css by `create-iris-mfe components`; the shadcn
+ * variables stay in index.css so the host keeps control of them.
+ */
+
+@theme inline {
+  /* IRIS */
+  --color-accordion-title: var(--accordion-title);
+  --color-table-header: var(--table-header);
+  --color-iris-bg-dark: var(--iris-bg-dark);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-link: var(--link);
+  --color-value-foreground: var(--value-foreground);
+  --color-border-subtle: var(--border-subtle);
+  --color-avatar: var(--avatar);
+  --color-avatar-foreground: var(--avatar-foreground);
+  --color-header-foreground: var(--header-foreground);
+  --color-header-text: var(--header-text);
+  --color-header-muted: var(--header-muted);
+  --color-header-subtle: var(--header-subtle);
+
+  /* Status badges - the six tones of the status guide */
+  --color-status-success: var(--status-success);
+  --color-status-success-foreground: var(--status-success-foreground);
+  --color-status-pending: var(--status-pending);
+  --color-status-pending-foreground: var(--status-pending-foreground);
+  --color-status-assigned: var(--status-assigned);
+  --color-status-assigned-foreground: var(--status-assigned-foreground);
+  --color-status-info: var(--status-info);
+  --color-status-info-foreground: var(--status-info-foreground);
+  --color-status-neutral: var(--status-neutral);
+  --color-status-neutral-foreground: var(--status-neutral-foreground);
+  --color-status-error: var(--status-error);
+  --color-status-error-foreground: var(--status-error-foreground);
+}
+
+:root {
+  /* IRIS */
+  --accordion-title: oklch(0.369 0.0438 251.5);
+  --table-header: oklch(0.993 0.0011 197.14);
+  --iris-bg-dark: oklch(0.339 0.035 262.007);
+  --info: oklch(0.623 0.188 259.815);
+  --info-foreground: oklch(1 0 0);
+  --link: oklch(0.488 0.217 264.376);
+  /* Values in the Details section */
+  --value-foreground: oklch(0.369 0.044 251.505);
+  /* Details dividers, line above table headers */
+  --border-subtle: oklch(0.965 0.008 241.664);
+  /* Sits on the dark page header in both themes */
+  --avatar: oklch(0.511 0.23 276.966);
+  --avatar-foreground: oklch(1 0 0);
+  /* Backdrop behind Modal and SidePanel */
+  --overlay: oklch(0 0 0 / 50%);
+  /* Text on the dark page header (InfoHeader, Breadcrumbs) - same in both
+     themes, because the header is dark in both */
+  --header-foreground: oklch(1 0 0);
+  --header-text: oklch(0.968 0.007 247.896);
+  --header-muted: oklch(0.704 0.04 256.788);
+  --header-subtle: oklch(0.554 0.046 257.417);
+
+  /* Status badges - background / text and dot, from the status guide */
+  --status-success: oklch(0.982 0.018 155.826);
+  --status-success-foreground: oklch(0.527 0.137 150.069);
+  --status-pending: oklch(0.987 0.026 102.212);
+  --status-pending-foreground: oklch(0.5545 0.121 66.442);
+  --status-assigned: oklch(0.962 0.018 272.314);
+  --status-assigned-foreground: oklch(0.457 0.215 277.023);
+  --status-info: oklch(0.97 0.014 254.604);
+  --status-info-foreground: oklch(0.488 0.217 264.376);
+  --status-neutral: oklch(0.985 0.002 247.839);
+  --status-neutral-foreground: oklch(0.373 0.031 259.733);
+  --status-error: oklch(0.971 0.013 17.38);
+  --status-error-foreground: oklch(0.505 0.19 27.518);
+}
+
+.dark {
+  /* IRIS */
+  --accordion-title: var(--foreground);
+  --table-header: var(--muted);
+  --iris-bg-dark: oklch(0.208 0.042 265.755);
+  --info: oklch(0.546 0.245 262.881);
+  --link: oklch(0.707 0.165 254.624);
+  --value-foreground: var(--foreground);
+  --border-subtle: var(--border);
+
+  /* Status badges - tinted background at 50%, light text */
+  --status-success: oklch(0.266 0.065 152.934 / 50%);
+  --status-success-foreground: oklch(0.871 0.15 154.449);
+  --status-pending: oklch(0.286 0.066 53.813 / 50%);
+  --status-pending-foreground: oklch(0.905 0.182 98.111);
+  --status-assigned: oklch(0.257 0.09 281.288 / 50%);
+  --status-assigned-foreground: oklch(0.785 0.115 274.713);
+  --status-info: oklch(0.282 0.091 267.935 / 50%);
+  --status-info-foreground: oklch(0.809 0.105 251.813);
+  --status-neutral: oklch(0.278 0.033 256.848 / 50%);
+  --status-neutral-foreground: oklch(0.872 0.01 258.338);
+  --status-error: oklch(0.258 0.092 26.042 / 50%);
+  --status-error-foreground: oklch(0.808 0.114 19.571);
+}
+
+/*
+ * Thin rounded scrollbar from the design. The standard properties are only for
+ * Firefox: in Chrome/Edge 121+ setting scrollbar-width or scrollbar-color
+ * disables every ::-webkit-scrollbar rule, so they stay behind @supports.
+ */
+@utility scrollbar-thin {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background-color: var(--border);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--muted-foreground);
+  }
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+}
+
+/*
+ * Backdrop of Modal (shadcn dialog) and SidePanel (shadcn drawer): the
+ * --overlay tint instead of the light tint + blur. Unlayered, so it wins
+ * over the utility classes.
+ */
+[data-slot="dialog-overlay"],
+[data-slot="drawer-overlay"] {
+  background-color: var(--overlay);
+  backdrop-filter: none;
+}
+
+/* shadcn drawer setup: lets the backdrop cover the viewport on iOS Safari
+   after scrolling. */
+@layer base {
+  body {
+    position: relative;
+  }
+}

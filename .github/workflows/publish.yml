@@ -37,6 +37,13 @@ jobs:
         run: npm ci && npm run build
         working-directory: template
 
+      - name: Verify the components variant installs and builds
+        run: |
+          node index.js components "$RUNNER_TEMP/components-check"
+          cd "$RUNNER_TEMP/components-check"
+          npm run build
+          npm run lint
+
       - name: Check package contents
         run: npm pack --dry-run
 

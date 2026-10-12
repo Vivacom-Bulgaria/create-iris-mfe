@@ -1,5 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority"
+import { XIcon } from "lucide-react"
 import type { ComponentProps } from "react"
+import { useTranslation } from "react-i18next"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -12,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { uiNamespace } from "@/lib/ui-i18n"
 import { cn } from "@/lib/utils"
 
 /*
@@ -32,39 +35,61 @@ export const Modal = Dialog
 
 export const ModalTrigger = DialogTrigger
 
-const modalContentVariants = cva(
-  "flex max-h-[calc(100svh-2rem)] flex-col",
-  {
-    variants: {
-      size: {
-        sm: "sm:max-w-lg",
-        md: "sm:max-w-3xl",
-        lg: "sm:max-w-5xl",
-        xl: "sm:max-w-7xl",
-        full: "sm:max-w-[calc(100%-2rem)]",
-        /** As wide as the content. */
-        auto: "w-fit sm:max-w-[calc(100%-2rem)]",
-      },
+const modalContentVariants = cva("flex max-h-[calc(100svh-2rem)] flex-col", {
+  variants: {
+    size: {
+      sm: "sm:max-w-lg",
+      md: "sm:max-w-3xl",
+      lg: "sm:max-w-5xl",
+      xl: "sm:max-w-7xl",
+      full: "sm:max-w-[calc(100%-2rem)]",
+      /** As wide as the content. */
+      auto: "w-fit sm:max-w-[calc(100%-2rem)]",
     },
-    defaultVariants: { size: "md" },
-  }
-)
+  },
+  defaultVariants: { size: "md" },
+})
 
 export type ModalSize = NonNullable<
   VariantProps<typeof modalContentVariants>["size"]
 >
 
+/**
+ * shadcn's DialogContent with its own × turned off: that one has a hardcoded
+ * English label, this one takes it from the `iris-ui` translations.
+ */
 export function ModalContent({
   size,
+  showCloseButton = true,
   className,
+  children,
   ...props
 }: ComponentProps<typeof DialogContent> &
   VariantProps<typeof modalContentVariants>) {
+  const { t } = useTranslation(uiNamespace)
+
   return (
     <DialogContent
+      showCloseButton={false}
       className={cn(modalContentVariants({ size }), className)}
       {...props}
-    />
+    >
+      {children}
+      {showCloseButton ? (
+        <DialogClose
+          aria-label={t("modal.close")}
+          render={
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="absolute top-2 right-2"
+            />
+          }
+        >
+          <XIcon />
+        </DialogClose>
+      ) : null}
+    </DialogContent>
   )
 }
 
@@ -94,7 +119,7 @@ export function ModalBody({ className, ...props }: ComponentProps<"div">) {
     <div
       data-slot="modal-body"
       className={cn(
-        "scrollbar-thin -mx-4 min-h-0 flex-1 overflow-y-auto px-4",
+        "-mx-4 scrollbar-thin min-h-0 flex-1 overflow-y-auto px-4",
         className
       )}
       {...props}

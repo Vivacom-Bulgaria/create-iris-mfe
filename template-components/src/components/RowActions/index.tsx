@@ -1,11 +1,11 @@
-import { MoreVertical } from "lucide-react";
-import type { ComponentProps } from "react";
-import { useTranslation } from "react-i18next";
+import { MoreVertical } from "lucide-react"
+import type { ComponentProps } from "react"
+import { useTranslation } from "react-i18next"
 
-import { Button } from "@/components/ui/button";
-import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { uiNamespace } from "@/lib/ui-i18n";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button"
+import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { uiNamespace } from "@/lib/ui-i18n"
+import { cn } from "@/lib/utils"
 
 /*
  * The "actions" cell of a table row: stacked buttons plus a ⋮ menu. The menu
@@ -20,7 +20,7 @@ export function RowActions({ className, ...props }: ComponentProps<"div">) {
       className={cn("flex items-center justify-end gap-2", className)}
       {...props}
     />
-  );
+  )
 }
 
 export function RowActionButtons({
@@ -33,7 +33,7 @@ export function RowActionButtons({
       className={cn("flex flex-col items-end gap-1.5", className)}
       {...props}
     />
-  );
+  )
 }
 
 export function RowActionButton({
@@ -47,7 +47,7 @@ export function RowActionButton({
       className={cn("rounded-full px-3", className)}
       {...props}
     />
-  );
+  )
 }
 
 /** The round ⋮ button that opens the DropdownMenu; children replace the icon. */
@@ -56,7 +56,7 @@ export function RowActionsTrigger({
   children = <MoreVertical />,
   ...props
 }: ComponentProps<typeof DropdownMenuTrigger>) {
-  const { t } = useTranslation(uiNamespace);
+  const { t } = useTranslation(uiNamespace)
 
   return (
     <DropdownMenuTrigger
@@ -67,7 +67,7 @@ export function RowActionsTrigger({
           size="icon"
           className={cn(
             "size-9 rounded-full data-popup-open:bg-muted",
-            className,
+            className
           )}
         />
       }
@@ -75,5 +75,5 @@ export function RowActionsTrigger({
     >
       {children}
     </DropdownMenuTrigger>
-  );
+  )
 }

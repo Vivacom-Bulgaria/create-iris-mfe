@@ -79,7 +79,7 @@ export function SidePanelContent({
     <DrawerContent
       className={cn(
         // Flush with the edge: no radius, no border (the design has neither).
-        "data-[swipe-direction=down]:rounded-none data-[swipe-direction=left]:rounded-none data-[swipe-direction=right]:rounded-none data-[swipe-direction=up]:rounded-none data-[swipe-direction=down]:border-0 data-[swipe-direction=left]:border-0 data-[swipe-direction=right]:border-0 data-[swipe-direction=up]:border-0",
+        "data-[swipe-direction=down]:rounded-none data-[swipe-direction=down]:border-0 data-[swipe-direction=left]:rounded-none data-[swipe-direction=left]:border-0 data-[swipe-direction=right]:rounded-none data-[swipe-direction=right]:border-0 data-[swipe-direction=up]:rounded-none data-[swipe-direction=up]:border-0",
         SIZE_CLASS[size],
         className
       )}

@@ -26,6 +26,9 @@ const bg = {
   rowActions: {
     more: "Още действия",
   },
+  breadcrumbs: {
+    label: "Навигационна пътека",
+  },
 }
 
 const en: typeof bg = {
@@ -46,6 +49,9 @@ const en: typeof bg = {
   },
   rowActions: {
     more: "More actions",
+  },
+  breadcrumbs: {
+    label: "Breadcrumb",
   },
 }
 

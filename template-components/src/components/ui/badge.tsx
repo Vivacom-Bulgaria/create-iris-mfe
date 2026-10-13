@@ -4,7 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex h-5 w-fit shrink-0 items-center gap-2 rounded-2xl border border-border px-2 py-0.5 text-xs font-semibold whitespace-nowrap [&>svg]:size-1.5 [&>svg]:shrink-0 [&>svg]:fill-current",
+  "inline-flex h-5 w-fit shrink-0 items-center gap-1 rounded-md border border-border px-2 py-0.5 text-xs font-semibold whitespace-nowrap [&>svg]:size-3 [&>svg]:shrink-0 [&>svg]:fill-current",
   {
     // The status guide's six tones; colours live in `index.css` (`--status-*`).
     variants: {
@@ -39,12 +39,12 @@ function Badge({
 function BadgeDot({ className, ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
-      viewBox="0 0 8 8"
+      viewBox="0 0 12 12"
       aria-hidden="true"
       className={cn(className)}
       {...props}
     >
-      <circle cx="4" cy="4" r="4" />
+      <circle cx="6" cy="6" r="3" />
     </svg>
   )
 }

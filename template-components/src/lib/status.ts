@@ -26,6 +26,15 @@ export const Status = {
   JobNew: "нов", // job ticket not yet scheduled
   InWork: "работи", // technician working on the job ticket
   RedirectionInProgress: "redirection_in_progress",
+  // Service status from Siebel - Bulgarian and English
+  Reinstalling: "в процес на възстановяване",
+  ReinstallingEn: "reinstallation in progress",
+  SuspensionPending: "в процес на ограничаване",
+  SuspensionPendingEn: "suspension pending",
+  ReactivationPending: "в процес на реактивация",
+  ReactivationPendingEn: "reactivation pending",
+  ResettingPin: "нулиране на pin",
+  ResettingPinEn: "resetting pin",
 
   // New / Assigned
   IssueNew: "нова", // issue not yet taken
@@ -46,6 +55,9 @@ export const Status = {
   // Error / Suspended
   Suspended: "временно изключен",
   Failed: "неуспешна",
+  SuspendedEn: "suspended", // Siebel
+  Terminated: "закрит", // Siebel service status
+  TerminatedEn: "terminated",
 } as const
 
 export type Status = (typeof Status)[keyof typeof Status]
@@ -81,6 +93,14 @@ const TONE_BY_STATUS: Record<Status, Tone> = {
   [Status.JobNew]: "pending",
   [Status.InWork]: "pending",
   [Status.RedirectionInProgress]: "pending",
+  [Status.Reinstalling]: "pending",
+  [Status.ReinstallingEn]: "pending",
+  [Status.SuspensionPending]: "pending",
+  [Status.SuspensionPendingEn]: "pending",
+  [Status.ReactivationPending]: "pending",
+  [Status.ReactivationPendingEn]: "pending",
+  [Status.ResettingPin]: "pending",
+  [Status.ResettingPinEn]: "pending",
 
   [Status.IssueNew]: "assigned",
   [Status.Assigned]: "assigned",
@@ -97,6 +117,9 @@ const TONE_BY_STATUS: Record<Status, Tone> = {
 
   [Status.Suspended]: "error",
   [Status.Failed]: "error",
+  [Status.SuspendedEn]: "error",
+  [Status.Terminated]: "error",
+  [Status.TerminatedEn]: "error",
 }
 
 export const toneOf = (raw: string): Tone => {

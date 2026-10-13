@@ -54,7 +54,7 @@ export const SidePanelTrigger = DrawerTrigger
 // Widths for left/right panels. Same variant prefix as shadcn's drawer.tsx,
 // so tailwind-merge replaces its 24rem default.
 const SIZE_CLASS = {
-  sm: "data-[swipe-axis=x]:sm:[--drawer-content-width:32rem]",
+  sm: "data-[swipe-axis=x]:sm:[--drawer-content-width:30rem]",
   md: "data-[swipe-axis=x]:sm:[--drawer-content-width:48rem]",
   lg: "data-[swipe-axis=x]:sm:[--drawer-content-width:64rem]",
   half: "data-[swipe-axis=x]:sm:[--drawer-content-width:50%]",
@@ -79,7 +79,7 @@ export function SidePanelContent({
     <DrawerContent
       className={cn(
         // Flush with the edge: no radius, no border (the design has neither).
-        "data-[swipe-direction=down]:rounded-none data-[swipe-direction=down]:border-0 data-[swipe-direction=left]:rounded-none data-[swipe-direction=left]:border-0 data-[swipe-direction=right]:rounded-none data-[swipe-direction=right]:border-0 data-[swipe-direction=up]:rounded-none data-[swipe-direction=up]:border-0",
+        "shadow-lg data-[swipe-direction=down]:rounded-none data-[swipe-direction=down]:border-0 data-[swipe-direction=left]:rounded-none data-[swipe-direction=left]:border-0 data-[swipe-direction=right]:rounded-none data-[swipe-direction=right]:border-0 data-[swipe-direction=up]:rounded-none data-[swipe-direction=up]:border-0",
         SIZE_CLASS[size],
         className
       )}
@@ -93,7 +93,7 @@ export function SidePanelContent({
             <Button
               variant="ghost"
               size="icon-sm"
-              className="absolute top-3 right-3"
+              className="absolute top-3.5 right-2.5"
             />
           }
         >
@@ -110,7 +110,10 @@ export function SidePanelHeader({
 }: ComponentProps<typeof DrawerHeader>) {
   // pr-12 keeps the title clear of the close icon.
   return (
-    <DrawerHeader className={cn("pr-12 text-left", className)} {...props} />
+    <DrawerHeader
+      className={cn("pr-12 pb-4 text-left", className)}
+      {...props}
+    />
   )
 }
 
@@ -122,7 +125,7 @@ export function SidePanelTitle({
   return (
     <DrawerTitle
       className={cn(
-        "flex items-center gap-2 [&_svg]:size-4 [&_svg]:shrink-0",
+        "flex items-center gap-2 text-xl leading-6 [&_svg]:size-5 [&_svg]:shrink-0",
         className
       )}
       {...props}
@@ -132,13 +135,13 @@ export function SidePanelTitle({
 
 export const SidePanelDescription = DrawerDescription
 
-/** The part that scrolls between the header and the footer. */
+/** The part that scrolls between the header and the footer; blocks 20px apart. */
 export function SidePanelBody({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="side-panel-body"
       className={cn(
-        "scrollbar-thin min-h-0 flex-1 overflow-y-auto p-4",
+        "flex scrollbar-thin min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-5 py-5",
         className
       )}
       {...props}
@@ -152,7 +155,7 @@ export function SidePanelFooter({
 }: ComponentProps<typeof DrawerFooter>) {
   return (
     <DrawerFooter
-      className={cn("sm:flex-row sm:justify-end", className)}
+      className={cn("pt-4 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   )

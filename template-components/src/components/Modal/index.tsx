@@ -35,10 +35,10 @@ export const Modal = Dialog
 
 export const ModalTrigger = DialogTrigger
 
-// Base look from the design, shared by every modal: a soft shadow instead of
-// the ring, a bit more room on top.
+// Base look from the design, shared by every modal: a soft shadow and a 1px
+// border, 10px corners.
 const modalContentVariants = cva(
-  "flex max-h-[calc(100svh-2rem)] flex-col pt-5 shadow-lg ring-0",
+  "flex max-h-[calc(100svh-2rem)] flex-col rounded-lg shadow-lg ring-1 ring-border",
   {
     variants: {
       size: {
@@ -87,7 +87,7 @@ export function ModalContent({
             <Button
               variant="ghost"
               size="icon-sm"
-              className="absolute top-4 right-4 text-muted-foreground"
+              className="absolute top-3.5 right-2.5 text-muted-foreground"
             />
           }
         >
@@ -107,7 +107,7 @@ export function ModalHeader({
 }
 
 const modalTitleVariants = cva(
-  "flex items-center gap-2 font-semibold [&_svg]:shrink-0",
+  "flex items-center gap-2 leading-6 font-semibold [&_svg]:shrink-0",
   {
     variants: {
       size: {
@@ -147,13 +147,14 @@ export function ModalTitle({
 
 export const ModalDescription = DialogDescription
 
-/** The part that scrolls; full width, so the scrollbar sits at the edge. */
+/** The part that scrolls; full width, so the scrollbar sits at the edge. pt-6 + the
+ * content gap put it 40px below the title. */
 export function ModalBody({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="modal-body"
       className={cn(
-        "-mx-4 scrollbar-thin min-h-0 flex-1 overflow-y-auto px-4",
+        "-mx-4 scrollbar-thin min-h-0 flex-1 overflow-y-auto px-4 pt-6",
         className
       )}
       {...props}

@@ -116,10 +116,7 @@ export function DataTable<TData extends RowData>({
                   <TableHead
                     key={header.id}
                     style={{ width: header.getSize() }}
-                    className={cn(
-                      headCellClass(meta),
-                      canSort && "bg-table-header-sortable"
-                    )}
+                    className={headCellClass(meta)}
                     aria-sort={
                       canSort
                         ? sortDirection
@@ -132,15 +129,15 @@ export function DataTable<TData extends RowData>({
                       <button
                         type="button"
                         onClick={header.column.getToggleSortingHandler()}
-                        className="flex w-full cursor-pointer items-center gap-2.5 rounded-sm text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+                        className="flex w-full cursor-pointer items-center gap-2 rounded-sm text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
                       >
                         <table.FlexRender header={header} />
                         {sortDirection === "asc" ? (
-                          <ArrowUp className="size-3.5 shrink-0" />
+                          <ArrowUp className="size-4 shrink-0" />
                         ) : sortDirection === "desc" ? (
-                          <ArrowDown className="size-3.5 shrink-0" />
+                          <ArrowDown className="size-4 shrink-0" />
                         ) : (
-                          <ArrowUpDown className="size-3.5 shrink-0 text-muted-foreground/50" />
+                          <ArrowUpDown className="size-4 shrink-0 text-muted-foreground/50" />
                         )}
                       </button>
                     ) : (

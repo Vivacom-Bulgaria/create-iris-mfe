@@ -23,6 +23,7 @@ Adds the components shared across IRIS micro-frontends on top of the base templa
 - `DetailList` - label/value pairs in a two-column grid, with skeleton and empty state
 - `Modal` - centered compound dialog (`ModalContent` / `ModalHeader` / `ModalBody` / `ModalFooter`), fixed or content width; the header and footer stay put while the body scrolls
 - `SidePanel` - the same layout stuck to a screen edge, on shadcn's Base UI Drawer (swipe to close, non-modal with `modal={false}`)
+- `ui/alert-dialog` - shadcn's AlertDialog for confirmations ("Are you sure?"): only its buttons close it, not a click outside
 - `AccordionComponent` - a collapsible section card
 - `RowActions` - the "actions" cell of a table row: stacked buttons plus a ⋮ menu with items and links
 - `OverflowTooltip` - truncated text with a tooltip (colour, arrow side/align and custom styles as props)

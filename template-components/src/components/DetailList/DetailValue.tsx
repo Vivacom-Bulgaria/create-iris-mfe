@@ -10,7 +10,7 @@ const isEmptyValue = (value: DetailRow["value"]) =>
   value === null || value === undefined || value === ""
 
 const Arrow = () => (
-  <ArrowRight className="size-3.5 shrink-0" aria-hidden="true" />
+  <ArrowRight className="size-3 shrink-0" aria-hidden="true" />
 )
 
 /**

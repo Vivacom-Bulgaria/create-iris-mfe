@@ -37,7 +37,7 @@ function InfoHeader({ className, ...props }: ComponentProps<typeof Card>) {
     <Card
       data-slot="info-header"
       className={cn(
-        "relative min-h-35 gap-0 rounded-2xl bg-iris-bg-dark px-5 py-4 text-header-text shadow-sm ring-0",
+        "relative min-h-35 gap-0 rounded-card bg-iris-bg-dark py-4 pr-4 pl-5 text-header-text shadow-sm ring-0",
         className
       )}
       {...props}
@@ -113,7 +113,7 @@ function InfoHeaderAvatar({
         )}
         {...props}
       >
-        <AvatarFallback className="rounded-md bg-avatar text-2xl font-semibold text-avatar-foreground">
+        <AvatarFallback className="rounded-md bg-avatar text-2xl font-semibold tracking-tighter text-avatar-foreground">
           {children ?? name?.trim().charAt(0).toUpperCase()}
         </AvatarFallback>
       </Avatar>
@@ -134,22 +134,32 @@ function InfoHeaderText({
   )
 }
 
+/**
+ * One line, cut with an ellipsis. shadcn's ItemTitle is `flex`, which turns
+ * its own line-clamp off, so the text truncates in an inner span.
+ */
 function InfoHeaderTitle({
   className,
+  children,
   ...props
 }: ComponentProps<typeof ItemTitle>) {
   return (
     <ItemTitle
       className={cn(
-        "w-full text-xl leading-tight font-semibold text-header-foreground",
+        "w-full text-xl leading-6 font-semibold text-header-foreground",
         className
       )}
       {...props}
-    />
+    >
+      <span className="min-w-0 truncate">{children}</span>
+    </ItemTitle>
   )
 }
 
-/** Put an icon before the text as a child: `<InfoHeaderSubtitle><IdCard />...`. */
+/**
+ * One line, cut with an ellipsis (`line-clamp-1` - no flex, which would turn
+ * it off). Put an icon before the text as a child: `<InfoHeaderSubtitle><IdCard />...`.
+ */
 function InfoHeaderSubtitle({
   className,
   ...props
@@ -157,7 +167,7 @@ function InfoHeaderSubtitle({
   return (
     <ItemDescription
       className={cn(
-        "flex items-center gap-1.5 text-xs text-header-foreground [&_svg]:size-3.5 [&_svg]:shrink-0",
+        "line-clamp-1 text-xs font-medium text-header-foreground [&_svg]:mr-1.5 [&_svg]:inline [&_svg]:size-3.5 [&_svg]:align-text-bottom",
         className
       )}
       {...props}
@@ -170,7 +180,7 @@ function InfoHeaderAlerts({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="info-header-alerts"
-      className={cn("flex flex-col items-end gap-1", className)}
+      className={cn("flex flex-col items-end", className)}
       {...props}
     />
   )

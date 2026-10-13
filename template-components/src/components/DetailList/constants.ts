@@ -8,8 +8,8 @@ export const DETAIL_GRID_CLASS =
 export const DETAIL_ROW_CLASS =
   "relative flex items-baseline justify-between gap-6 pt-5 pb-2"
 
-/** Label and value text on an 18px line (leading-4.5): the design's 46px rows. */
-export const DETAIL_TEXT_CLASS = "text-sm leading-4.5"
+/** Label and value text (12px) on an 18px line (leading-4.5): the design's 46px rows. */
+export const DETAIL_TEXT_CLASS = "text-xs leading-4.5"
 
 export const INTERACTIVE_VALUE_CLASS =
   "inline-flex items-center gap-1.5 font-medium text-value-foreground underline underline-offset-3 transition-colors hover:text-primary"

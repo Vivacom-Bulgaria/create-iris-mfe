@@ -93,14 +93,24 @@ export const defaultColumn = <TData extends RowData>() =>
 /** For rows without a stable id of their own. */
 export const indexRowId = (_: unknown, index: number) => String(index)
 
+/**
+ * Cells wrap by default (shadcn's TableCell is nowrap). tailwind-merge does
+ * not treat `truncate` and `whitespace-normal` as a conflict and the latter
+ * wins in the CSS, so a column asking for `truncate` must not get it.
+ */
+const wrapUnlessTruncated = (className?: string) =>
+  className?.split(/\s+/).includes("truncate") ? null : "whitespace-normal"
+
 export const headCellClass = (meta?: DataTableColumnMeta) =>
   cn(
-    "h-8 px-2 py-2 align-top text-xs font-medium whitespace-normal",
+    "h-8 px-2 py-2 align-top text-xs font-medium",
+    wrapUnlessTruncated(meta?.headClassName),
     meta?.headClassName
   )
 
 export const bodyCellClass = (meta?: DataTableColumnMeta) =>
   cn(
-    "overflow-hidden px-2 py-3 align-middle text-xs wrap-break-word whitespace-normal",
+    "overflow-hidden px-2 py-3 align-middle text-xs wrap-break-word",
+    wrapUnlessTruncated(meta?.cellClassName),
     meta?.cellClassName
   )

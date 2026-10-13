@@ -57,8 +57,9 @@ export function RowActionButtons({
 }
 
 /**
- * A grey pill. Disabled keeps the lighter `secondary` fill, so it reads as
- * inactive rather than as a faded darker grey.
+ * A grey pill; a long label wraps onto a second line. Disabled keeps the
+ * lighter `secondary` fill, so it reads as inactive rather than as a faded
+ * darker grey.
  */
 export function RowActionButton({
   className,
@@ -69,7 +70,7 @@ export function RowActionButton({
       variant="secondary"
       size="sm"
       className={cn(
-        "h-8 rounded-full bg-border hover:bg-[color-mix(in_oklch,var(--border),var(--foreground)_6%)] disabled:bg-secondary",
+        "h-auto min-h-8 rounded-full bg-border px-2 py-1 text-center text-xs leading-4 font-normal whitespace-normal hover:bg-[color-mix(in_oklch,var(--border),var(--foreground)_6%)] disabled:bg-secondary",
         className
       )}
       {...props}
@@ -93,7 +94,7 @@ export function RowActionsTrigger({
           variant="ghost"
           size="icon"
           className={cn(
-            "size-9 rounded-full data-popup-open:bg-muted",
+            "size-9 rounded-md data-popup-open:bg-muted",
             className
           )}
         />
@@ -105,7 +106,11 @@ export function RowActionsTrigger({
   )
 }
 
-/** shadcn's DropdownMenuContent with the design's roomier items and a flush separator. */
+/**
+ * shadcn's DropdownMenuContent with the design's roomier items and a flush
+ * separator. An icon after the text sits at the right edge, muted:
+ * `<DropdownMenuItem render={<a href={url} target="_blank" />}>Виж инструкция<ExternalLink /></DropdownMenuItem>`.
+ */
 export function RowActionsMenuContent({
   align = "end",
   className,
@@ -115,7 +120,7 @@ export function RowActionsMenuContent({
     <DropdownMenuContent
       align={align}
       className={cn(
-        "w-auto min-w-60 py-0 **:data-[slot=dropdown-menu-item]:px-3 **:data-[slot=dropdown-menu-item]:py-2.5 **:data-[slot=dropdown-menu-separator]:my-0 **:data-[slot=dropdown-menu-shortcut]:text-muted-foreground/70",
+        "w-auto min-w-60 py-0 **:data-[slot=dropdown-menu-item]:px-3 **:data-[slot=dropdown-menu-item]:py-2.5 **:data-[slot=dropdown-menu-separator]:my-0 **:data-[slot=dropdown-menu-shortcut]:text-muted-foreground/70 [&_[data-slot=dropdown-menu-item]>svg:last-child:not(:first-child)]:ml-auto [&_[data-slot=dropdown-menu-item]>svg:last-child:not(:first-child)]:text-muted-foreground/70",
         className
       )}
       {...props}

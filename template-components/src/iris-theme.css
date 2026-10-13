@@ -8,7 +8,6 @@
   /* IRIS */
   --color-accordion-title: var(--accordion-title);
   --color-table-header: var(--table-header);
-  --color-table-header-sortable: var(--table-header-sortable);
   --color-label-foreground: var(--label-foreground);
   --color-iris-bg-dark: var(--iris-bg-dark);
   --color-info: var(--info);
@@ -22,6 +21,9 @@
   --color-header-text: var(--header-text);
   --color-header-muted: var(--header-muted);
   --color-header-subtle: var(--header-subtle);
+
+  /* Page cards (header, sections): 16px whatever --radius is */
+  --radius-card: 1rem;
 
   /* Status badges - the six tones of the status guide */
   --color-status-success: var(--status-success);
@@ -42,8 +44,6 @@
   /* IRIS */
   --accordion-title: oklch(0.369 0.0438 251.5);
   --table-header: oklch(0.993 0.0011 197.14);
-  /* Header cells of sortable columns stand out a little */
-  --table-header-sortable: oklch(0.985 0 0);
   /* Labels in the Details section */
   --label-foreground: oklch(0.554 0.046 257.417);
   --iris-bg-dark: oklch(0.339 0.035 262.007);
@@ -58,7 +58,7 @@
   --avatar: oklch(0.511 0.262 276.966);
   --avatar-foreground: oklch(1 0 0);
   /* Backdrop behind Modal and SidePanel */
-  --overlay: oklch(0 0 0 / 50%);
+  --overlay: oklch(0 0 0 / 60%);
   /* Text on the dark page header (InfoHeader, Breadcrumbs) - same in both
      themes, because the header is dark in both */
   --header-foreground: oklch(1 0 0);
@@ -85,11 +85,6 @@
   /* IRIS */
   --accordion-title: var(--foreground);
   --table-header: var(--muted);
-  --table-header-sortable: color-mix(
-    in oklch,
-    var(--muted),
-    var(--foreground) 5%
-  );
   --label-foreground: var(--muted-foreground);
   --iris-bg-dark: oklch(0.208 0.042 265.755);
   --info: oklch(0.546 0.245 262.881);
@@ -140,11 +135,12 @@
 }
 
 /*
- * Backdrop of Modal (shadcn dialog) and SidePanel (shadcn drawer): the
- * --overlay tint instead of the light tint + blur. Unlayered, so it wins
- * over the utility classes.
+ * Backdrop of Modal (shadcn dialog), shadcn alert-dialog and SidePanel (shadcn
+ * drawer): the --overlay tint instead of the light tint + blur. Unlayered, so
+ * it wins over the utility classes.
  */
 [data-slot="dialog-overlay"],
+[data-slot="alert-dialog-overlay"],
 [data-slot="drawer-overlay"] {
   background-color: var(--overlay);
   backdrop-filter: none;

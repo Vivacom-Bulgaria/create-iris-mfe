@@ -51,7 +51,7 @@ export function Pagination({
         {t("ui.pagination.currentPage", { page, totalPages })}
       </span>
 
-      <PaginationContent className="gap-1">
+      <PaginationContent className="gap-2">
         {PAGE_BUTTONS.map(({ icon: Icon, label, target }) => {
           const next = target(page, totalPages)
 
@@ -59,7 +59,7 @@ export function Pagination({
             <PaginationItem key={label}>
               <Button
                 variant="outline"
-                size="icon-lg"
+                size="icon"
                 className="shadow-xs"
                 disabled={next < 1 || next > totalPages || next === page}
                 onClick={() => onPageChange(next)}

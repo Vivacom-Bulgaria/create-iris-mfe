@@ -13,7 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { uiNamespace } from "@/lib/ui-i18n"
+import { i18nNamespace } from "@/i18n"
 import { cn } from "@/lib/utils"
 
 /*
@@ -73,7 +73,7 @@ export function SidePanelContent({
   size?: SidePanelSize
   showCloseButton?: boolean
 }) {
-  const { t } = useTranslation(uiNamespace)
+  const { t } = useTranslation(i18nNamespace)
 
   return (
     <DrawerContent
@@ -88,7 +88,7 @@ export function SidePanelContent({
       {children}
       {showCloseButton ? (
         <DrawerClose
-          aria-label={t("modal.close")}
+          aria-label={t("ui.modal.close")}
           render={
             <Button
               variant="ghost"

@@ -8,6 +8,8 @@
   /* IRIS */
   --color-accordion-title: var(--accordion-title);
   --color-table-header: var(--table-header);
+  --color-table-header-sortable: var(--table-header-sortable);
+  --color-label-foreground: var(--label-foreground);
   --color-iris-bg-dark: var(--iris-bg-dark);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
@@ -40,6 +42,10 @@
   /* IRIS */
   --accordion-title: oklch(0.369 0.0438 251.5);
   --table-header: oklch(0.993 0.0011 197.14);
+  /* Header cells of sortable columns stand out a little */
+  --table-header-sortable: oklch(0.985 0 0);
+  /* Labels in the Details section */
+  --label-foreground: oklch(0.554 0.046 257.417);
   --iris-bg-dark: oklch(0.339 0.035 262.007);
   --info: oklch(0.623 0.188 259.815);
   --info-foreground: oklch(1 0 0);
@@ -49,7 +55,7 @@
   /* Details dividers, line above table headers */
   --border-subtle: oklch(0.965 0.008 241.664);
   /* Sits on the dark page header in both themes */
-  --avatar: oklch(0.511 0.23 276.966);
+  --avatar: oklch(0.511 0.262 276.966);
   --avatar-foreground: oklch(1 0 0);
   /* Backdrop behind Modal and SidePanel */
   --overlay: oklch(0 0 0 / 50%);
@@ -57,7 +63,7 @@
      themes, because the header is dark in both */
   --header-foreground: oklch(1 0 0);
   --header-text: oklch(0.968 0.007 247.896);
-  --header-muted: oklch(0.704 0.04 256.788);
+  --header-muted: oklch(0.82 0.005 250);
   --header-subtle: oklch(0.554 0.046 257.417);
 
   /* Status badges - background / text and dot, from the status guide */
@@ -79,6 +85,12 @@
   /* IRIS */
   --accordion-title: var(--foreground);
   --table-header: var(--muted);
+  --table-header-sortable: color-mix(
+    in oklch,
+    var(--muted),
+    var(--foreground) 5%
+  );
+  --label-foreground: var(--muted-foreground);
   --iris-bg-dark: oklch(0.208 0.042 265.755);
   --info: oklch(0.546 0.245 262.881);
   --link: oklch(0.707 0.165 254.624);

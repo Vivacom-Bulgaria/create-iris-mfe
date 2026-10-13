@@ -10,7 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { uiNamespace } from "@/lib/ui-i18n"
+import { i18nNamespace } from "@/i18n"
 import { cn } from "@/lib/utils"
 
 export type Crumb = {
@@ -23,19 +23,19 @@ export type Crumb = {
 /**
  * Breadcrumbs styled for the dark page header. Presentational only: the caller
  * builds the trail (labels already translated), so any micro-frontend can use
- * it with its own routes. The <nav> label defaults to the `iris-ui`
- * translation; pass `aria-label` to override it.
+ * it with its own routes. The <nav> label defaults to `ui.breadcrumbs.label`
+ * in src/lang; pass `aria-label` to override it.
  */
 export const Breadcrumbs = ({
   crumbs,
   className,
   ...props
 }: ComponentProps<typeof Breadcrumb> & { crumbs: Crumb[] }) => {
-  const { t } = useTranslation(uiNamespace)
+  const { t } = useTranslation(i18nNamespace)
 
   return (
     <Breadcrumb
-      aria-label={t("breadcrumbs.label")}
+      aria-label={t("ui.breadcrumbs.label")}
       className={cn("min-w-0", className)}
       {...props}
     >
@@ -43,7 +43,7 @@ export const Breadcrumbs = ({
         {crumbs.map((crumb, index) => (
           <Fragment key={crumb.id}>
             {index > 0 ? (
-              <BreadcrumbSeparator className="text-header-subtle" />
+              <BreadcrumbSeparator className="text-header-text" />
             ) : null}
             <BreadcrumbItem className="min-w-0">
               {crumb.to ? (

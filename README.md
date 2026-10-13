@@ -28,7 +28,7 @@ Adds the components shared across IRIS micro-frontends on top of the base templa
 - `OverflowTooltip` - truncated text with a tooltip (colour, arrow side/align and custom styles as props)
 - the shadcn/ui primitives they use, in `src/components/ui/`
 
-Their design tokens are in `src/iris-theme.css`, imported from `src/index.css`. Texts of the shared components live in their own `iris-ui` i18n namespace (`src/lib/ui-i18n.ts`). Other shadcn/ui components are still added with `npx shadcn@latest add <component>`.
+Their design tokens are in `src/iris-theme.css`, imported from `src/index.css`. Texts of the shared components are the `ui` keys in `src/lang/bg.ts` and `src/lang/en.ts`. Other shadcn/ui components are still added with `npx shadcn@latest add <component>`.
 
 A project cannot be named `components`.
 

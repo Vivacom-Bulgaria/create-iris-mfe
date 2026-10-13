@@ -1,13 +1,17 @@
 import type { ReactNode } from "react"
 import type { To } from "react-router"
 
-import { EmptyState } from "@/components/ui/empty-state"
+import { EmptyState } from "@/components/ui/empty"
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { skeletonWidth } from "@/lib/skeleton"
 import { cn } from "@/lib/utils"
 
-import { DETAIL_GRID_CLASS, DETAIL_ROW_CLASS } from "./constants"
+import {
+  DETAIL_GRID_CLASS,
+  DETAIL_ROW_CLASS,
+  DETAIL_TEXT_CLASS,
+} from "./constants"
 import { DetailValue } from "./DetailValue"
 
 export type DetailRow = {
@@ -47,7 +51,9 @@ const DetailRowShell = ({
       aria-hidden="true"
       className="absolute inset-x-0 top-0 bg-border-subtle"
     />
-    <dt className="shrink-0 text-sm text-muted-foreground">{label}</dt>
+    <dt className={cn("shrink-0 text-label-foreground", DETAIL_TEXT_CLASS)}>
+      {label}
+    </dt>
     {children}
   </div>
 )
@@ -73,7 +79,12 @@ export function DetailList({
     >
       {rows.map((row, index) => (
         <DetailRowShell key={row.id} label={row.label}>
-          <dd className="min-w-0 text-right text-sm wrap-break-word">
+          <dd
+            className={cn(
+              "min-w-0 text-right wrap-break-word",
+              DETAIL_TEXT_CLASS
+            )}
+          >
             {isLoading ? (
               <Skeleton className={cn("ml-auto h-4", skeletonWidth(index))} />
             ) : (

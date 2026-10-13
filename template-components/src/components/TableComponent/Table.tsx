@@ -16,7 +16,7 @@ import {
   PAGE_SIZE_OPTIONS,
 } from "@/components/TableComponent/constants"
 import { TableSkeleton } from "@/components/TableComponent/TableSkeleton"
-import { EmptyState } from "@/components/ui/empty-state"
+import { EmptyState } from "@/components/ui/empty"
 import {
   Table,
   TableBody,
@@ -116,7 +116,10 @@ export function DataTable<TData extends RowData>({
                   <TableHead
                     key={header.id}
                     style={{ width: header.getSize() }}
-                    className={headCellClass(meta)}
+                    className={cn(
+                      headCellClass(meta),
+                      canSort && "bg-table-header-sortable"
+                    )}
                     aria-sort={
                       canSort
                         ? sortDirection
@@ -129,7 +132,7 @@ export function DataTable<TData extends RowData>({
                       <button
                         type="button"
                         onClick={header.column.getToggleSortingHandler()}
-                        className="flex w-full cursor-pointer items-start gap-1.5 rounded-sm text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+                        className="flex w-full cursor-pointer items-center gap-2.5 rounded-sm text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
                       >
                         <table.FlexRender header={header} />
                         {sortDirection === "asc" ? (
@@ -168,7 +171,7 @@ export function DataTable<TData extends RowData>({
       </Table>
 
       {isPaginated ? (
-        <div className="flex shrink-0 flex-wrap items-center justify-end gap-6 px-4 py-3">
+        <div className="flex shrink-0 flex-wrap items-center justify-end gap-8 px-2">
           <PageSizeSelect
             options={sizes}
             value={currentPageSize}

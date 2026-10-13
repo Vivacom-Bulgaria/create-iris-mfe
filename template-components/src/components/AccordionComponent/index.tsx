@@ -1,13 +1,12 @@
-import type { LucideIcon } from "lucide-react"
-import { type ReactNode, useId } from "react"
+import { ChevronDownIcon, type LucideIcon } from "lucide-react"
+import type { ReactNode } from "react"
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Card } from "@/components/ui/card"
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
@@ -26,6 +25,10 @@ export type AccordionComponentProps = {
   contentClassName?: string
 }
 
+/**
+ * A collapsible section card: shadcn Card + Collapsible (one section, so no
+ * Accordion). The whole header row toggles it.
+ */
 export function AccordionComponent({
   id,
   icon: Icon,
@@ -38,45 +41,53 @@ export function AccordionComponent({
   className,
   contentClassName,
 }: AccordionComponentProps) {
-  const generatedId = useId()
-  const value = id ?? generatedId
-
   return (
     <Card
+      id={id}
       data-slot="card-detail"
-      className={cn("overflow-hidden py-0 shadow-sm ring-0", className)}
+      className={cn(
+        "gap-0 overflow-hidden rounded-2xl py-0 shadow-sm ring-0",
+        className
+      )}
     >
-      <Accordion
-        defaultValue={defaultOpen ? [value] : []}
-        multiple
-        onValueChange={(open) => onOpenChange?.(open.includes(value))}
-      >
-        <AccordionItem
-          value={value}
-          className="group/section relative border-none"
-        >
-          {actions ? (
-            <div className="absolute top-3.5 right-12 z-10 flex items-center gap-2">
-              {actions}
-            </div>
-          ) : null}
-          <AccordionTrigger className="rounded-none border-none px-4 py-5 hover:no-underline">
-            <span className="flex items-center gap-2 text-xs font-semibold tracking-wider text-accordion-title uppercase">
-              {Icon ? (
-                <Icon className="size-4 shrink-0" aria-hidden="true" />
-              ) : null}
-              {title}
-            </span>
-          </AccordionTrigger>
+      <Collapsible defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
+        <CardHeader className="group/section block px-0">
+          {/* The actions sit in the row, so a header with a button grows to
+              fit it; the trigger's ::after covers the row, so it all toggles. */}
+          <div className="relative flex items-center gap-3 py-4.5 pr-5 pl-4 has-data-[slot=section-actions]:pt-4 has-data-[slot=section-actions]:pb-3">
+            <CollapsibleTrigger className="flex min-w-0 flex-1 items-center text-left outline-none after:absolute after:inset-0 focus-visible:after:ring-3 focus-visible:after:ring-ring/50 focus-visible:after:ring-inset">
+              <CardTitle className="flex items-center gap-2 text-xs font-semibold tracking-wider text-accordion-title uppercase">
+                {Icon ? (
+                  <Icon className="size-4 shrink-0" aria-hidden="true" />
+                ) : null}
+                {title}
+              </CardTitle>
+            </CollapsibleTrigger>
+            {actions ? (
+              <div
+                data-slot="section-actions"
+                className="relative z-10 flex items-center gap-2"
+              >
+                {actions}
+              </div>
+            ) : null}
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="pointer-events-none size-4 shrink-0 text-accordion-title transition-transform duration-200 group-has-data-panel-open/section:rotate-180"
+            />
+          </div>
           {titleDivider ? (
-            // Same Separator and colour as the rows below; shown only while open.
-            <Separator className="mx-4 bg-border-subtle opacity-0 transition-opacity duration-200 group-data-open/section:opacity-100 data-horizontal:w-auto" />
+            // Same Separator, colour and inset (32px) as the DetailList rows below;
+            // shown only while open.
+            <Separator className="mx-8 bg-border-subtle opacity-0 transition-opacity duration-200 group-has-data-panel-open/section:opacity-100 data-horizontal:w-auto" />
           ) : null}
-          <AccordionContent className={cn("px-4 pb-4", contentClassName)}>
+        </CardHeader>
+        <CollapsibleContent className="h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0">
+          <CardContent className={cn("px-4 pb-4", contentClassName)}>
             {children}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+          </CardContent>
+        </CollapsibleContent>
+      </Collapsible>
     </Card>
   )
 }

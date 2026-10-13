@@ -3,21 +3,41 @@ import type { ComponentProps } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Button } from "@/components/ui/button"
-import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { uiNamespace } from "@/lib/ui-i18n"
+import {
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { i18nNamespace } from "@/i18n"
 import { cn } from "@/lib/utils"
 
 /*
  * The "actions" cell of a table row: stacked buttons plus a ⋮ menu. The menu
- * is plain shadcn DropdownMenu - only the round ⋮ trigger is ours.
+ * items are plain shadcn DropdownMenu parts; RowActionsMenuContent only gives
+ * them the design's spacing.
  *
+ *   <RowActions>
+ *     <RowActionButtons>
+ *       <RowActionButton onClick={authorize}>{t("authorize")}</RowActionButton>
+ *     </RowActionButtons>
+ *     <DropdownMenu>
+ *       <RowActionsTrigger disabled={inactive} />
+ *       <RowActionsMenuContent>
+ *         <DropdownMenuItem onClick={openHistory}>{t("history")}</DropdownMenuItem>
+ *         <DropdownMenuSeparator />
+ *         <DropdownMenuItem render={<a href={url} target="_blank" />}>
+ *           {t("manual")}
+ *           <DropdownMenuShortcut><ExternalLink /></DropdownMenuShortcut>
+ *         </DropdownMenuItem>
+ *       </RowActionsMenuContent>
+ *     </DropdownMenu>
+ *   </RowActions>
  */
 
 export function RowActions({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="row-actions"
-      className={cn("flex items-center justify-end gap-2", className)}
+      className={cn("flex items-start justify-end", className)}
       {...props}
     />
   )
@@ -30,12 +50,16 @@ export function RowActionButtons({
   return (
     <div
       data-slot="row-action-buttons"
-      className={cn("flex flex-col items-end gap-1.5", className)}
+      className={cn("flex flex-col items-end gap-1", className)}
       {...props}
     />
   )
 }
 
+/**
+ * A grey pill. Disabled keeps the lighter `secondary` fill, so it reads as
+ * inactive rather than as a faded darker grey.
+ */
 export function RowActionButton({
   className,
   ...props
@@ -44,7 +68,10 @@ export function RowActionButton({
     <Button
       variant="secondary"
       size="sm"
-      className={cn("rounded-full px-3", className)}
+      className={cn(
+        "h-8 rounded-full bg-border hover:bg-[color-mix(in_oklch,var(--border),var(--foreground)_6%)] disabled:bg-secondary",
+        className
+      )}
       {...props}
     />
   )
@@ -56,11 +83,11 @@ export function RowActionsTrigger({
   children = <MoreVertical />,
   ...props
 }: ComponentProps<typeof DropdownMenuTrigger>) {
-  const { t } = useTranslation(uiNamespace)
+  const { t } = useTranslation(i18nNamespace)
 
   return (
     <DropdownMenuTrigger
-      aria-label={t("rowActions.more")}
+      aria-label={t("ui.rowActions.more")}
       render={
         <Button
           variant="ghost"
@@ -75,5 +102,23 @@ export function RowActionsTrigger({
     >
       {children}
     </DropdownMenuTrigger>
+  )
+}
+
+/** shadcn's DropdownMenuContent with the design's roomier items and a flush separator. */
+export function RowActionsMenuContent({
+  align = "end",
+  className,
+  ...props
+}: ComponentProps<typeof DropdownMenuContent>) {
+  return (
+    <DropdownMenuContent
+      align={align}
+      className={cn(
+        "w-auto min-w-60 py-0 **:data-[slot=dropdown-menu-item]:px-3 **:data-[slot=dropdown-menu-item]:py-2.5 **:data-[slot=dropdown-menu-separator]:my-0 **:data-[slot=dropdown-menu-shortcut]:text-muted-foreground/70",
+        className
+      )}
+      {...props}
+    />
   )
 }

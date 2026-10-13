@@ -15,6 +15,29 @@ const bg = {
       outsideDescription: "Извикано от обикновена функция, не от компонент.",
     },
   },
+  ui: {
+    pagination: {
+      navigation: "Навигация по страници",
+      currentPage: "Страница {{page}} от {{totalPages}}",
+      firstPage: "Първа страница",
+      previousPage: "Предишна страница",
+      nextPage: "Следваща страница",
+      lastPage: "Последна страница",
+      rowsPerPage: "Редове на страница",
+    },
+    emptyState: {
+      noData: "Няма намерени данни",
+    },
+    modal: {
+      close: "Затвори",
+    },
+    rowActions: {
+      more: "Още действия",
+    },
+    breadcrumbs: {
+      label: "Навигационна пътека",
+    },
+  },
 }
 
 export default bg

@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { uiNamespace } from "@/lib/ui-i18n"
+import { i18nNamespace } from "@/i18n"
 
 /** "Rows per page" select. */
 export function PageSizeSelect({
@@ -24,19 +24,22 @@ export function PageSizeSelect({
   value: number
   onChange: (value: number) => void
 }) {
-  const { t } = useTranslation(uiNamespace)
+  const { t } = useTranslation(i18nNamespace)
   const selectId = useId()
 
   return (
-    <Field orientation="horizontal" className="w-fit">
-      <FieldLabel className="text-sm font-semibold" htmlFor={selectId}>
-        {label ?? t("pagination.rowsPerPage")}
+    <Field orientation="horizontal" className="w-fit gap-4">
+      <FieldLabel className="text-sm font-medium" htmlFor={selectId}>
+        {label ?? t("ui.pagination.rowsPerPage")}
       </FieldLabel>
       <Select
         value={value.toString()}
         onValueChange={(next) => onChange(Number(next))}
       >
-        <SelectTrigger className="w-20" id={selectId}>
+        <SelectTrigger
+          className="w-22.5 border-foreground/15 data-[size=default]:h-9"
+          id={selectId}
+        >
           <SelectValue />
         </SelectTrigger>
         <SelectContent

@@ -68,7 +68,7 @@ export function DetailValue({ row }: { row: DetailRow }) {
     <span
       className={cn(
         "inline-flex items-center gap-1.5 font-medium text-value-foreground",
-        row.underline && "underline underline-offset-4"
+        row.underline && "underline underline-offset-3"
       )}
     >
       {content}

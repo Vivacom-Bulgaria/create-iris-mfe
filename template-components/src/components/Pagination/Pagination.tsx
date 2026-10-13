@@ -8,7 +8,12 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { Button } from "@/components/ui/button"
-import { uiNamespace } from "@/lib/ui-i18n"
+import {
+  Pagination as PaginationRoot,
+  PaginationContent,
+  PaginationItem,
+} from "@/components/ui/pagination"
+import { i18nNamespace } from "@/i18n"
 
 type PageButton = {
   icon: LucideIcon
@@ -33,33 +38,39 @@ export function Pagination({
   totalPages: number
   onPageChange: (page: number) => void
 }) {
-  const { t } = useTranslation(uiNamespace)
+  const { t } = useTranslation(i18nNamespace)
 
+  // shadcn's nav > ul > li structure; its Previous/Next links are not used -
+  // they are <a href> with English text, and these are buttons.
   return (
-    <nav
-      className="flex items-center gap-2"
-      aria-label={t("pagination.navigation")}
+    <PaginationRoot
+      aria-label={t("ui.pagination.navigation")}
+      className="mx-0 w-auto items-center gap-12"
     >
-      <span className="mr-4 text-sm font-semibold text-foreground">
-        {t("pagination.currentPage", { page, totalPages })}
+      <span className="text-sm font-medium text-foreground">
+        {t("ui.pagination.currentPage", { page, totalPages })}
       </span>
 
-      {PAGE_BUTTONS.map(({ icon: Icon, label, target }) => {
-        const next = target(page, totalPages)
+      <PaginationContent className="gap-1">
+        {PAGE_BUTTONS.map(({ icon: Icon, label, target }) => {
+          const next = target(page, totalPages)
 
-        return (
-          <Button
-            key={label}
-            variant="outline"
-            size="icon"
-            disabled={next < 1 || next > totalPages || next === page}
-            onClick={() => onPageChange(next)}
-            aria-label={t(`pagination.${label}`)}
-          >
-            <Icon />
-          </Button>
-        )
-      })}
-    </nav>
+          return (
+            <PaginationItem key={label}>
+              <Button
+                variant="outline"
+                size="icon-lg"
+                className="shadow-xs"
+                disabled={next < 1 || next > totalPages || next === page}
+                onClick={() => onPageChange(next)}
+                aria-label={t(`ui.pagination.${label}`)}
+              >
+                <Icon />
+              </Button>
+            </PaginationItem>
+          )
+        })}
+      </PaginationContent>
+    </PaginationRoot>
   )
 }

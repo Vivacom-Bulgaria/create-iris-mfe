@@ -1,6 +1,6 @@
 {
   "name": "create-iris-mfe",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scaffold a Vite + React + Module Federation remote",
   "keywords": [
     "create-project",
@@ -20,6 +20,7 @@
   "files": [
     "index.js",
     "template",
+    "template-components",
     "!template/node_modules",
     "!template/dist",
     "!template/.mf",

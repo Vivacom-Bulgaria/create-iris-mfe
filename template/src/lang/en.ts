@@ -15,6 +15,29 @@ const en = {
       outsideDescription: "Called from a plain function, not a component.",
     },
   },
+  ui: {
+    pagination: {
+      navigation: "Page navigation",
+      currentPage: "Page {{page}} of {{totalPages}}",
+      firstPage: "First page",
+      previousPage: "Previous page",
+      nextPage: "Next page",
+      lastPage: "Last page",
+      rowsPerPage: "Rows per page",
+    },
+    emptyState: {
+      noData: "No data found",
+    },
+    modal: {
+      close: "Close",
+    },
+    rowActions: {
+      more: "More actions",
+    },
+    breadcrumbs: {
+      label: "Breadcrumb",
+    },
+  },
 }
 
 export default en

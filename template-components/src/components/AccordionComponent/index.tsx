@@ -46,7 +46,7 @@ export function AccordionComponent({
       id={id}
       data-slot="card-detail"
       className={cn(
-        "gap-0 overflow-hidden rounded-card py-0 shadow-sm ring-0",
+        "gap-0 overflow-hidden rounded-[1rem] py-0 shadow-sm ring-0",
         className
       )}
     >

@@ -135,13 +135,13 @@ export function SidePanelTitle({
 
 export const SidePanelDescription = DrawerDescription
 
-/** The part that scrolls between the header and the footer; blocks 20px apart. */
+/** The part that scrolls between the header and the footer. */
 export function SidePanelBody({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="side-panel-body"
       className={cn(
-        "flex scrollbar-thin min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-5 py-5",
+        "scrollbar-thin min-h-0 flex-1 overflow-y-auto px-5 py-5",
         className
       )}
       {...props}

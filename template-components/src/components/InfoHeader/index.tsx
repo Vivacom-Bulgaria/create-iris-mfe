@@ -37,7 +37,7 @@ function InfoHeader({ className, ...props }: ComponentProps<typeof Card>) {
     <Card
       data-slot="info-header"
       className={cn(
-        "relative min-h-35 gap-0 rounded-card bg-iris-bg-dark py-4 pr-4 pl-5 text-header-text shadow-sm ring-0",
+        "relative min-h-35 gap-0 rounded-[1rem] bg-iris-bg-dark py-4 pr-4 pl-5 text-header-text shadow-sm ring-0",
         className
       )}
       {...props}

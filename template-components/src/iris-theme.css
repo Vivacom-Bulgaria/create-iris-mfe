@@ -22,9 +22,6 @@
   --color-header-muted: var(--header-muted);
   --color-header-subtle: var(--header-subtle);
 
-  /* Page cards (header, sections): 16px whatever --radius is */
-  --radius-card: 1rem;
-
   /* Status badges - the six tones of the status guide */
   --color-status-success: var(--status-success);
   --color-status-success-foreground: var(--status-success-foreground);

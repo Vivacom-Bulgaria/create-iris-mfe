@@ -1,11 +1,11 @@
-import i18n from "i18next"
+import i18n from "i18next";
 
 /**
  * Texts of the shared UI components (pagination, empty state), kept in their
  * own namespace so the components work in any micro-frontend - not only where
- * this remote's `dth` namespace is registered.
+ * this remote's `template` namespace is registered.
  */
-export const uiNamespace = "iris-ui" as const
+export const uiNamespace = "iris-ui" as const;
 
 const bg = {
   pagination: {
@@ -29,7 +29,7 @@ const bg = {
   breadcrumbs: {
     label: "Навигационна пътека",
   },
-}
+};
 
 const en: typeof bg = {
   pagination: {
@@ -53,21 +53,21 @@ const en: typeof bg = {
   breadcrumbs: {
     label: "Breadcrumb",
   },
-}
+};
 
 // Same ordering concern as src/i18n.ts: federated, the host has initialised
 // i18next already; standalone, `init()` may still be pending.
 const addBundles = () => {
   if (!i18n.hasResourceBundle("bg", uiNamespace)) {
-    i18n.addResourceBundle("bg", uiNamespace, bg, true, true)
+    i18n.addResourceBundle("bg", uiNamespace, bg, true, true);
   }
   if (!i18n.hasResourceBundle("en", uiNamespace)) {
-    i18n.addResourceBundle("en", uiNamespace, en, true, true)
+    i18n.addResourceBundle("en", uiNamespace, en, true, true);
   }
-}
+};
 
 if (i18n.isInitialized) {
-  addBundles()
+  addBundles();
 } else {
-  i18n.on("initialized", addBundles)
+  i18n.on("initialized", addBundles);
 }

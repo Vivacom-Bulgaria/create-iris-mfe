@@ -55,7 +55,7 @@ export function AccordionComponent({
           {/* 56px with or without a button (up to 40px tall), centred; the
               trigger's ::after covers the row, so it all toggles. */}
           <div className="relative flex min-h-14 items-center gap-2 py-2 pr-5 pl-4">
-            <CollapsibleTrigger className="flex min-w-0 flex-1 items-center text-left outline-none after:absolute after:inset-0 focus-visible:after:ring-3 focus-visible:after:ring-ring/50 focus-visible:after:ring-inset">
+            <CollapsibleTrigger className="flex min-w-0 flex-1 cursor-pointer items-center text-left outline-none after:absolute after:inset-0 focus-visible:after:ring-3 focus-visible:after:ring-ring/50 focus-visible:after:ring-inset">
               <CardTitle className="flex items-center gap-2.5 text-xs font-semibold tracking-normal text-accordion-title uppercase">
                 {Icon ? (
                   <Icon className="size-3.5 shrink-0" aria-hidden="true" />
